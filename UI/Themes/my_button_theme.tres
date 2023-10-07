@@ -1,0 +1,30 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://wgr8ngf3t34r"]
+
+[ext_resource type="Texture2D" uid="uid://3yftccpibsn" path="res://UI/Images/button.png" id="1_dhfs8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xrps3"]
+texture = ExtResource("1_dhfs8")
+modulate_color = Color(1, 1, 1, 0.352941)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_60ylh"]
+texture = ExtResource("1_dhfs8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qp2qk"]
+texture = ExtResource("1_dhfs8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_12taf"]
+texture = ExtResource("1_dhfs8")
+modulate_color = Color(1, 1, 1, 0.784314)
+
+[resource]
+Button/colors/font_color = Color(0, 0.196078, 0.196078, 1)
+Button/colors/font_disabled_color = Color(0, 0.117647, 0, 0.501961)
+Button/colors/font_focus_color = Color(0, 0.196078, 0.196078, 1)
+Button/colors/font_hover_color = Color(0, 0.196078, 0.196078, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0.196078, 0.196078, 1)
+Button/colors/font_pressed_color = Color(0, 0.196078, 0.196078, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = SubResource("StyleBoxTexture_xrps3")
+Button/styles/focus = SubResource("StyleBoxTexture_60ylh")
+Button/styles/hover = SubResource("StyleBoxTexture_qp2qk")
+Button/styles/normal = SubResource("StyleBoxTexture_12taf")

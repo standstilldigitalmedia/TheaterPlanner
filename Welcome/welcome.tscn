@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://cglu5egp2dbog"]
+
+[ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="1_03w4h"]
+[ext_resource type="Script" path="res://Welcome/welcome.gd" id="1_qam4s"]
+
+[node name="Welcome" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qam4s")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Background"]
+custom_minimum_size = Vector2(400, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="NewScheduleButton" type="Button" parent="Background/ButtonsContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme = ExtResource("1_03w4h")
+text = "New Schedule"
+
+[node name="ModifycheduleButton" type="Button" parent="Background/ButtonsContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme = ExtResource("1_03w4h")
+text = "Modify Schedule"
+
+[connection signal="pressed" from="Background/ButtonsContainer/NewScheduleButton" to="." method="_on_new_schedule_button_pressed"]
+[connection signal="pressed" from="Background/ButtonsContainer/ModifycheduleButton" to="." method="_on_modifychedule_button_pressed"]

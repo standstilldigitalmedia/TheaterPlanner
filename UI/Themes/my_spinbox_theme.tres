@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cepf0eeqt2mpk"]
+
+[ext_resource type="Texture2D" uid="uid://dhinq5du6dg21" path="res://UI/Images/arrows.png" id="1_eas1u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b1if"]
+bg_color = Color(0, 0.117647, 0.117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dc5f"]
+bg_color = Color(0, 0.117647, 0.117647, 1)
+
+[resource]
+default_font_size = 37
+LineEdit/colors/font_color = Color(0.00392157, 0.756863, 0.756863, 1)
+LineEdit/colors/font_placeholder_color = Color(0.00392157, 0.756863, 0.756863, 0.6)
+LineEdit/colors/font_selected_color = Color(0.00392157, 0.756863, 0.756863, 1)
+LineEdit/constants/minimum_character_width = 2
+LineEdit/styles/focus = SubResource("StyleBoxFlat_5b1if")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_8dc5f")
+SpinBox/icons/updown = ExtResource("1_eas1u")
