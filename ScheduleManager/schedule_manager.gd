@@ -7,12 +7,11 @@ func delete_all_schedules():
 func spawn_schedule_buttons():
 	delete_all_schedules()
 	for schedule in ConfigManager.config_obj:
-		#print("schedule loop obj = " + JSON.stringify(ConfigManager.config_obj))
-		#print("schedule loop = " + ConfigManager.config_obj[schedule].schedule_name)
-		var schedule_button_scene = load(ConfigManager.MY_BUTTON_SCENE_PATH)
-		var schedule_button = schedule_button_scene.instantiate()
-		schedule_button.set_text(schedule)
-		$Background/SchedulesScrollContainer/SchedulesContainer.add_child(schedule_button)
+		if ConfigManager.config_obj[schedule]["entry_type"] == "schedule":
+			var schedule_button_scene = load(ConfigManager.MY_BUTTON_SCENE_PATH)
+			var schedule_button = schedule_button_scene.instantiate()
+			schedule_button.set_text(ConfigManager.config_obj[schedule]["entry_name"])
+			$Background/SchedulesScrollContainer/SchedulesContainer.add_child(schedule_button)
 
 func _on_add_schedule_button_pressed():
 	var schedule_name = $Background/InputsContainer/ScheduleNameInputBackground/ScheduleNameInput.get_text()
@@ -25,8 +24,9 @@ func _on_add_schedule_button_pressed():
 	spawn_schedule_buttons()
 	
 func _ready():
+	ConfigManager.read_config()
 	spawn_schedule_buttons()
 
 
-func _on_main_menu_button_pressed():
-	get_tree().change_scene_to_file(ConfigManager.WELCOME_SCENE_PATH)
+func _on_delete_data_button_pressed():
+	DirAccess.remove_absolute(ConfigManager.CONFIG_PATH)

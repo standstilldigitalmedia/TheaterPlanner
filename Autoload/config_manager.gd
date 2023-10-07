@@ -11,7 +11,6 @@ const NEW_MOVIE_SCENE_PATH = "res://NewMovie/new_movie.tscn"
 func write_config():
 	config.set_value("planner_section","planner_json",JSON.stringify(config_obj))
 	config.save(CONFIG_PATH)
-	print("config written = " + JSON.stringify(config_obj))
 	
 func read_config():
 	config = ConfigFile.new()
@@ -30,15 +29,16 @@ func read_config():
 		config_obj = data_received
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-		
-	print("config read = " + JSON.stringify(config_obj))
 
 func get_selected_schedule():
-	return config_obj[config_obj["selected_schedule"]]
+	return config_obj[config_obj["selected_schedule"]["entry_name"]]
+	
+func set_selected_schedule(schedule_name):
+	config_obj["selected_schedule"] = {"entry_type":"selected_schedule", "entry_name":schedule_name}
 
 func add_schedule(schedule_name):
-	config_obj[schedule_name] = {"schedule_name":schedule_name}
-	config_obj[schedule_name]["selected_schedule"] = schedule_name
+	config_obj[schedule_name] = {"entry_type":"schedule", "entry_name":schedule_name, "data":{}}
+	config_obj["selected_schedule"] = {"entry_type":"selected_schedule", "entry_name":schedule_name}
 	write_config()
 	
 func get_selected_movie():

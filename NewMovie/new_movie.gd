@@ -8,5 +8,5 @@ func _on_add_movie_button_pressed():
 		$Background/ErrorLabel.set_text("Please enter a movie name with 3 or more characters")
 		return
 	
-	ConfigManager.add_movie({"movie_name": movie_name, "priority": priority, "color": color})
+	ConfigManager.add_movie({"movie_name": movie_name, "priority": priority, "color": color, "listings": []})
 	ConfigManager.write_config()
