@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://p45hcv3rj2fx"]
+
+[ext_resource type="Texture2D" uid="uid://douerajbyrr2o" path="res://UI/Images/close_button.png" id="1_3i2k0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jkchh"]
+texture = ExtResource("1_3i2k0")
+
+[resource]
+Button/styles/normal = SubResource("StyleBoxTexture_jkchh")

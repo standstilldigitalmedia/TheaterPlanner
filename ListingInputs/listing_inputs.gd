@@ -1,6 +1,13 @@
 extends Control
 
-var sep = "*"
+func set_values(theatre,start_hour,start_min,start_am_pm,run_time_hour,run_time_minute):
+	$ListingContainer/TheatreContainer/TheatreSelectButton.set_text(theatre)
+	$ListingContainer/StartTimeContainer/StartHour.get_line_edit().set_text(start_hour)
+	$ListingContainer/StartTimeContainer/StartMinute.get_line_edit().set_text(start_min)
+	$ListingContainer/StartTimeContainer/AmPmButton.set_text(start_am_pm)
+	$ListingContainer/RunTimeContainer/Hour.get_line_edit().set_text(run_time_hour)
+	$ListingContainer/RunTimeContainer/Minute.get_line_edit().set_text(run_time_minute)
+	
 func get_values():
 	var theatre = $ListingContainer/TheatreContainer/TheatreSelectButton.get_text()
 	var start_hour = $ListingContainer/StartTimeContainer/StartHour.get_line_edit().get_text()

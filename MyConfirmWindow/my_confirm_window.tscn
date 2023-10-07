@@ -1,0 +1,128 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwnogp0xwybeu"]
+
+[ext_resource type="Script" path="res://MyConfirmWindow/my_confirm_window.gd" id="1_u0rqx"]
+[ext_resource type="Texture2D" uid="uid://cmfviwdjfkulp" path="res://UI/Images/full_screen_background.png" id="2_fei3s"]
+[ext_resource type="Theme" uid="uid://7ug4svgqw7bl" path="res://UI/Themes/my_header_label_theme.tres" id="3_us5cx"]
+[ext_resource type="Theme" uid="uid://bio0np2bdwycd" path="res://UI/Themes/my_label_theme.tres" id="4_fir2s"]
+[ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="5_623vq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2a308"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_72e8x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_00ki7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8abr8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hh4bs"]
+
+[node name="MyConfirmWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u0rqx")
+
+[node name="BlockerPanel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.0392157, 0.0392157, 0.784314)
+
+[node name="MainPanel" type="NinePatchRect" parent="BlockerPanel"]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24
+anchor_top = 0.269
+anchor_right = 0.76
+anchor_bottom = 0.731
+offset_left = -0.800018
+offset_top = -0.52002
+offset_right = 0.799927
+offset_bottom = 0.52002
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fei3s")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="HeaderLabel" type="Label" parent="BlockerPanel/MainPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("3_us5cx")
+text = "What the heck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestionLabel" type="Label" parent="BlockerPanel/MainPanel"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.442
+anchor_right = 0.9
+anchor_bottom = 0.558
+offset_left = 380.0
+offset_top = 1.49998
+offset_right = -380.0
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_fir2s")
+text = "Lets see what happens "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="BlockerPanel/MainPanel"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="Button1" type="Button" parent="BlockerPanel/MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme = ExtResource("5_623vq")
+
+[node name="Button2" type="Button" parent="BlockerPanel/MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme = ExtResource("5_623vq")
+
+[node name="CloseButton" type="Button" parent="BlockerPanel/MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.96
+anchor_right = 1.0
+anchor_bottom = 0.08
+offset_left = -6.10352e-05
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2a308")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_72e8x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_00ki7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8abr8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hh4bs")
+
+[connection signal="pressed" from="BlockerPanel/MainPanel/ButtonContainer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="BlockerPanel/MainPanel/ButtonContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="BlockerPanel/MainPanel/CloseButton" to="." method="_on_close_button_pressed"]

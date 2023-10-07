@@ -2,19 +2,15 @@ extends Node
 
 var config: ConfigFile
 var config_obj = {}
-const CONFIG_PATH = "user://theater-planner.cfg"
-const MY_BUTTON_SCENE_PATH = "res://UI/Scenes/my_button.tscn"
-const WELCOME_SCENE_PATH = "res://Welcome/welcome.tscn"
-const NEW_SCHEDULE_SCENE_PATH = "res://NewSchedule/new_schedule.tscn"
-const NEW_MOVIE_SCENE_PATH = "res://NewMovie/new_movie.tscn"
 
 func write_config():
 	config.set_value("planner_section","planner_json",JSON.stringify(config_obj))
-	config.save(CONFIG_PATH)
+	config.save(GlobalManager.CONFIG_PATH)
 	
 func read_config():
+	config_obj = {}
 	config = ConfigFile.new()
-	var err = config.load(CONFIG_PATH)
+	var err = config.load(GlobalManager.CONFIG_PATH)
 	
 	if err != OK:
 		config = ConfigFile.new()
@@ -30,15 +26,19 @@ func read_config():
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 
+func delete_config():
+	DirAccess.remove_absolute(GlobalManager.CONFIG_PATH)
+	read_config()
+
 func get_selected_schedule():
-	return config_obj[config_obj["selected_schedule"]["entry_name"]]
+	return config_obj["selected_schedule"]
 	
 func set_selected_schedule(schedule_name):
-	config_obj["selected_schedule"] = {"entry_type":"selected_schedule", "entry_name":schedule_name}
+	config_obj["selected_schedule"] = config_obj[schedule_name]
 
 func add_schedule(schedule_name):
 	config_obj[schedule_name] = {"entry_type":"schedule", "entry_name":schedule_name, "data":{}}
-	config_obj["selected_schedule"] = {"entry_type":"selected_schedule", "entry_name":schedule_name}
+	config_obj["selected_schedule"] = config_obj[schedule_name]
 	write_config()
 	
 func get_selected_movie():
