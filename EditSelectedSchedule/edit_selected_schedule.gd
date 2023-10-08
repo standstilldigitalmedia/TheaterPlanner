@@ -21,6 +21,9 @@ func on_movie_control_update():
 	spawn_movie_controls()
 	var confim = GlobalManager.create_confim_window("Updated", "Your record has been updated", "Ok", "Cancel")
 	add_child(confim)
+	
+func on_showings():
+	get_tree().change_scene_to_file(GlobalManager.EDIT_SHOWINGS_SCENE_PATH)
 		
 func spawn_movie_controls():
 	delete_all_movie_controls()
@@ -34,6 +37,7 @@ func spawn_movie_controls():
 		movie_control.set_values(movie_name, priority, movie_color)
 		movie_control.update.connect(on_movie_control_update)
 		movie_control.delete.connect(on_confirm_delete_movie)
+		movie_control.showings.connect(on_showings)
 		$Background/Foreground/MovieButtonsScrollContainer/MovieButtonsContainer.add_child(movie_control)
 			
 func _ready():

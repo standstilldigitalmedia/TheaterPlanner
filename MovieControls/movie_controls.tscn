@@ -87,4 +87,5 @@ theme = ExtResource("5_b1nrr")
 text = "Delete"
 
 [connection signal="pressed" from="InputsContainer/UpdateButton" to="." method="update_config"]
+[connection signal="pressed" from="InputsContainer/ShowingsButton" to="." method="_on_showings_button_pressed"]
 [connection signal="pressed" from="InputsContainer/DeleteButton" to="." method="_on_delete_button_pressed"]

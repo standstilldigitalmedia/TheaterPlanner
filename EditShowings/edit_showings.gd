@@ -1,0 +1,48 @@
+extends Control
+
+func reset_controls():
+	$Background/Foreground/ControlsContainer/AmPmOptionButton.set_text("AM")
+	$Background/Foreground/ControlsContainer/RunHour.set_value(1)
+	$Background/Foreground/ControlsContainer/RunMinute.set_value(0)
+	$Background/Foreground/ControlsContainer/StartHour.set_value(1)
+	$Background/Foreground/ControlsContainer/StartMinute.set_value(0)
+	
+func delete_all_showing_controls():
+	for showing in $Background/Foreground/ShowingsControlsScrollContainer/ShowingsControlsContainer.get_children():
+		showing.queue_free()
+		
+func spawn_showing_controls():
+	delete_all_showing_controls()
+	var data_obj = ConfigManager.get_movie_showings()
+	for showing in data_obj:
+		var start_hour = showing["start_hour"]
+		var start_minute = showing["start_minute"]
+		var start_ampm = showing["start_ampm"]
+		var run_hour = showing["run_hour"]
+		var run_minute = showing["run_minute"]
+		
+		var showing_control_scene = load(GlobalManager.SHOWING_CONTROLS_PATH)
+		var showing_control = showing_control_scene.instantiate()
+		
+		showing_control.set_values(start_hour, start_minute, start_ampm, run_hour, run_minute)
+		#showing_control.update.connect(on_movie_control_update)
+		#showing_control.delete.connect(on_confirm_delete_movie)
+		#showing_control.showings.connect(on_showings)
+		$Background/Foreground/ShowingsControlsScrollContainer/ShowingsControlsContainer.add_child(showing_control)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Background/Foreground/HeaderLabel.set_text(ConfigManager.selected_movie)
+	$Background/Foreground/ErrorLabel.set_text("")
+	$Background/Foreground/ControlsContainer/AmPmOptionButton.set_text("AM")
+	spawn_showing_controls()
+
+func _on_close_button_pressed():
+	add_child(GlobalManager.confirm_quit_planner())
+
+func _on_back_button_pressed():
+	get_tree().change_scene_to_file(GlobalManager.EDIT_SELECTED_SCHEDULE_PATH)
+
+func _on_add_showing_button_pressed():
+	ConfigManager.add_showing($Background/Foreground/ControlsContainer/StartHour.get_value(), $Background/Foreground/ControlsContainer/StartMinute.get_value(), $Background/Foreground/ControlsContainer/AmPmOptionButton.get_text(), $Background/Foreground/ControlsContainer/RunHour.get_value(), $Background/Foreground/ControlsContainer/RunMinute.get_value())
+	reset_controls()
+	spawn_showing_controls()

@@ -1,14 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://cp2foxknokc0g"]
+[gd_scene load_steps=13 format=3 uid="uid://da5fagkp21hyi"]
 
-[ext_resource type="Script" path="res://EditSelectedSchedule/edit_selected_schedule.gd" id="1_j7crm"]
-[ext_resource type="Texture2D" uid="uid://cmfviwdjfkulp" path="res://UI/Images/full_screen_background.png" id="1_vjuji"]
-[ext_resource type="Theme" uid="uid://7ug4svgqw7bl" path="res://UI/Themes/my_header_label_theme.tres" id="2_qu5ow"]
-[ext_resource type="Texture2D" uid="uid://ck22lg7ds7ovc" path="res://UI/Images/text_input.png" id="4_86okj"]
-[ext_resource type="Theme" uid="uid://56nx8cnihqa2" path="res://UI/Themes/my_line_edit_theme.tres" id="5_c1a68"]
-[ext_resource type="Theme" uid="uid://bio0np2bdwycd" path="res://UI/Themes/my_label_theme.tres" id="6_6t5mj"]
-[ext_resource type="Theme" uid="uid://85avfn20i7au" path="res://UI/Themes/my_error_label_theme.tres" id="6_8kqai"]
-[ext_resource type="Theme" uid="uid://cepf0eeqt2mpk" path="res://UI/Themes/my_spinbox_theme.tres" id="7_pol5a"]
-[ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="8_m6b83"]
+[ext_resource type="Script" path="res://EditShowings/edit_showings.gd" id="1_5vqx7"]
+[ext_resource type="Texture2D" uid="uid://cmfviwdjfkulp" path="res://UI/Images/full_screen_background.png" id="1_l7c4a"]
+[ext_resource type="Theme" uid="uid://7ug4svgqw7bl" path="res://UI/Themes/my_header_label_theme.tres" id="2_cl15d"]
+[ext_resource type="Theme" uid="uid://bio0np2bdwycd" path="res://UI/Themes/my_label_theme.tres" id="4_bt8pn"]
+[ext_resource type="Theme" uid="uid://cepf0eeqt2mpk" path="res://UI/Themes/my_spinbox_theme.tres" id="5_nqdfy"]
+[ext_resource type="Theme" uid="uid://85avfn20i7au" path="res://UI/Themes/my_error_label_theme.tres" id="6_0fhlj"]
+[ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="7_hw0om"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdoeq"]
 
@@ -20,14 +18,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24chu"]
 
-[node name="EditSelectedSchedule" type="Control"]
+[node name="EditShowings" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j7crm")
+script = ExtResource("1_5vqx7")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -51,7 +49,7 @@ offset_right = -0.880127
 offset_bottom = -0.320068
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_vjuji")
+texture = ExtResource("1_l7c4a")
 patch_margin_left = 42
 patch_margin_top = 42
 patch_margin_right = 42
@@ -82,67 +80,79 @@ anchor_bottom = 0.094
 offset_top = 0.400002
 offset_bottom = -0.119995
 grow_horizontal = 2
-theme = ExtResource("2_qu5ow")
+theme = ExtResource("2_cl15d")
 text = "Header Text"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputsContainer" type="HBoxContainer" parent="Background/Foreground"]
+[node name="ControlsContainer" type="HBoxContainer" parent="Background/Foreground"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.28
+anchor_left = 0.34
 anchor_top = 0.102
-anchor_right = 0.72
-anchor_bottom = 0.153
-offset_left = 0.600037
+anchor_right = 0.66
+anchor_bottom = 0.143
+offset_left = -0.199951
 offset_top = 0.0400085
-offset_right = -0.599976
-offset_bottom = 0.0600128
+offset_right = 0.200073
+offset_bottom = -0.139984
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 43
+theme_override_constants/separation = 30
 
-[node name="MovieNameInputBackground" type="NinePatchRect" parent="Background/Foreground/InputsContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="StartLabel" type="Label" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
-texture = ExtResource("4_86okj")
-patch_margin_left = 17
-patch_margin_top = 16
-patch_margin_right = 15
-patch_margin_bottom = 16
+theme = ExtResource("4_bt8pn")
+text = "Start Time: "
 
-[node name="MovieNameInput" type="LineEdit" parent="Background/Foreground/InputsContainer/MovieNameInputBackground"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.06
-anchor_top = 0.22
-anchor_right = 0.95
-anchor_bottom = 0.78
-offset_left = 6.10352e-05
-offset_top = 6.00815e-05
-offset_right = 6.10352e-05
-offset_bottom = 6.10352e-05
-theme = ExtResource("5_c1a68")
-placeholder_text = "Enter Movie Name..."
-
-[node name="PriorityLabel" type="Label" parent="Background/Foreground/InputsContainer"]
+[node name="StartHour" type="SpinBox" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
-theme = ExtResource("6_6t5mj")
-text = "Priority:"
+theme = ExtResource("5_nqdfy")
+min_value = 1.0
+max_value = 12.0
+value = 1.0
 
-[node name="PrioritySpinBox" type="SpinBox" parent="Background/Foreground/InputsContainer"]
+[node name="Simicolon" type="Label" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
-theme = ExtResource("7_pol5a")
+theme = ExtResource("4_bt8pn")
+text = ":"
 
-[node name="MovieColorLabel" type="Label" parent="Background/Foreground/InputsContainer"]
+[node name="StartMinute" type="SpinBox" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
-theme = ExtResource("6_6t5mj")
-text = "Movie Color:"
+theme = ExtResource("5_nqdfy")
+max_value = 59.0
+step = 15.0
 
-[node name="MovieColorPicker" type="ColorPickerButton" parent="Background/Foreground/InputsContainer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="AmPmOptionButton" type="OptionButton" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
-color = Color(0, 0.588235, 0.588235, 1)
+item_count = 2
+popup/item_0/text = "AM"
+popup/item_0/id = 0
+popup/item_1/text = "PM"
+popup/item_1/id = 1
+
+[node name="RunLabel" type="Label" parent="Background/Foreground/ControlsContainer"]
+layout_mode = 2
+theme = ExtResource("4_bt8pn")
+text = "Run Time: "
+
+[node name="RunHour" type="SpinBox" parent="Background/Foreground/ControlsContainer"]
+layout_mode = 2
+theme = ExtResource("5_nqdfy")
+min_value = 1.0
+max_value = 12.0
+value = 1.0
+
+[node name="Simicolon2" type="Label" parent="Background/Foreground/ControlsContainer"]
+layout_mode = 2
+theme = ExtResource("4_bt8pn")
+text = ":"
+
+[node name="RunMinute" type="SpinBox" parent="Background/Foreground/ControlsContainer"]
+layout_mode = 2
+theme = ExtResource("5_nqdfy")
+max_value = 59.0
+step = 15.0
 
 [node name="ErrorLabel" type="Label" parent="Background/Foreground"]
 layout_mode = 1
@@ -157,31 +167,31 @@ offset_right = 0.180176
 offset_bottom = 0.320023
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_8kqai")
+theme = ExtResource("6_0fhlj")
 text = "How big
 could th"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="AddMovieButton" type="Button" parent="Background/Foreground"]
+[node name="AddShowingButton" type="Button" parent="Background/Foreground"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.416
-anchor_top = 0.224
-anchor_right = 0.584
-anchor_bottom = 0.276
-offset_left = -0.47998
-offset_top = 0.480026
-offset_right = 0.47998
-offset_bottom = -0.47998
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -270.0
+offset_right = 150.0
+offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("8_m6b83")
-text = "Add Movie"
+theme = ExtResource("7_hw0om")
+text = "Add Showing"
 
-[node name="MovieButtonsScrollContainer" type="ScrollContainer" parent="Background/Foreground"]
+[node name="ShowingsControlsScrollContainer" type="ScrollContainer" parent="Background/Foreground"]
 custom_minimum_size = Vector2(1000, 400)
 layout_mode = 1
 anchors_preset = -1
@@ -196,7 +206,7 @@ offset_bottom = 0.30011
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MovieButtonsContainer" type="GridContainer" parent="Background/Foreground/MovieButtonsScrollContainer"]
+[node name="ShowingsControlsContainer" type="GridContainer" parent="Background/Foreground/ShowingsControlsScrollContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 88
@@ -215,10 +225,10 @@ offset_right = 0.26001
 offset_bottom = 0.340088
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("8_m6b83")
+theme = ExtResource("7_hw0om")
 text = "Back"
 
-[node name="DeleteScheduleButton" type="Button" parent="Background/Foreground"]
+[node name="DeleteAllShowingsButton" type="Button" parent="Background/Foreground"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -232,10 +242,9 @@ offset_right = 0.26001
 offset_bottom = -0.0199585
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("8_m6b83")
-text = "Delete Schedule"
+theme = ExtResource("7_hw0om")
+text = "Delete All Showings"
 
 [connection signal="pressed" from="Background/Foreground/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="Background/Foreground/AddMovieButton" to="." method="_on_add_movie_button_pressed"]
+[connection signal="pressed" from="Background/Foreground/AddShowingButton" to="." method="_on_add_showing_button_pressed"]
 [connection signal="pressed" from="Background/Foreground/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="Background/Foreground/DeleteScheduleButton" to="." method="_on_delete_schedule_button_pressed"]

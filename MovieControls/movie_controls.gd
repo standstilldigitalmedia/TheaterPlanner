@@ -2,6 +2,7 @@ extends Control
 
 signal update
 signal delete
+signal showings
 
 var previous_name = ""
 
@@ -19,5 +20,10 @@ func update_config():
 
 
 func _on_delete_button_pressed():
-	ConfigManager.selected_movie = $InputsContainer/NameInputBackground/NameInput.get_text()
+	ConfigManager.selected_movie = previous_name
 	delete.emit()
+
+
+func _on_showings_button_pressed():
+	ConfigManager.selected_movie = previous_name
+	showings.emit()
