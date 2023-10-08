@@ -1,6 +1,7 @@
 extends Control
 
 signal update
+signal delete
 
 var previous_name = ""
 
@@ -15,3 +16,8 @@ func update_config():
 	previous_name = $InputsContainer/NameInputBackground/NameInput.get_text()
 	ConfigManager.update_movie($InputsContainer/NameInputBackground/NameInput.get_text(),new_prev_name, $InputsContainer/PrioritySpinBox.get_value(), $InputsContainer/MovieColorPicker.color)
 	update.emit()
+
+
+func _on_delete_button_pressed():
+	ConfigManager.selected_movie = $InputsContainer/NameInputBackground/NameInput.get_text()
+	delete.emit()

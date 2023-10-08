@@ -31,6 +31,16 @@ func read_config():
 func delete_config():
 	DirAccess.remove_absolute(GlobalManager.CONFIG_PATH)
 	read_config()
+	
+func delete_selected_schedule():
+	config_obj.erase(selected_schedule)
+	selected_schedule = ""
+	write_config()
+	
+func delete_selected_movie():
+	config_obj[selected_schedule].erase(selected_movie)
+	selected_movie = ""
+	write_config()
 
 func add_schedule(schedule_name):
 	config_obj[schedule_name] = {}
