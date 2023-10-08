@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://tfbf5wenbiot"]
+
+[node name="Container" type="Container"]
+custom_minimum_size = Vector2(0, 1)
+anchors_preset = -1
+anchor_right = 0.021
+offset_right = -0.320004
+offset_bottom = 1.0

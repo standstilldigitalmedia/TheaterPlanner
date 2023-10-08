@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://da5fagkp21hyi"]
+[gd_scene load_steps=14 format=3 uid="uid://da5fagkp21hyi"]
 
 [ext_resource type="Script" path="res://EditShowings/edit_showings.gd" id="1_5vqx7"]
 [ext_resource type="Texture2D" uid="uid://cmfviwdjfkulp" path="res://UI/Images/full_screen_background.png" id="1_l7c4a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://cepf0eeqt2mpk" path="res://UI/Themes/my_spinbox_theme.tres" id="5_nqdfy"]
 [ext_resource type="Theme" uid="uid://85avfn20i7au" path="res://UI/Themes/my_error_label_theme.tres" id="6_0fhlj"]
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="7_hw0om"]
+[ext_resource type="PackedScene" uid="uid://dkax421daj48j" path="res://ShowingControls/showing_controls.tscn" id="8_cffk6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdoeq"]
 
@@ -195,14 +196,14 @@ text = "Add Showing"
 custom_minimum_size = Vector2(1000, 400)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.167
+anchor_left = 0.225
 anchor_top = 0.357
-anchor_right = 0.835
+anchor_right = 0.788
 anchor_bottom = 0.765
-offset_left = -0.350006
+offset_left = -0.5
 offset_top = 0.140015
-offset_right = 0.610107
-offset_bottom = 0.30011
+offset_right = 0.360718
+offset_bottom = 0.300049
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -210,6 +211,9 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 88
+
+[node name="ShowingControls" parent="Background/Foreground/ShowingsControlsScrollContainer/ShowingsControlsContainer" instance=ExtResource("8_cffk6")]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="Background/Foreground"]
 custom_minimum_size = Vector2(300, 50)

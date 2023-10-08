@@ -1,47 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca0vuk05bgpsp"]
+[gd_scene load_steps=5 format=3 uid="uid://dkax421daj48j"]
 
 [ext_resource type="Theme" uid="uid://bio0np2bdwycd" path="res://UI/Themes/my_label_theme.tres" id="1_2quuo"]
-[ext_resource type="Script" path="res://ShowingControls/showing_controls.gd" id="1_hn6vc"]
+[ext_resource type="Script" path="res://ShowingControls/showing_controls.gd" id="1_jxte7"]
 [ext_resource type="Theme" uid="uid://cepf0eeqt2mpk" path="res://UI/Themes/my_spinbox_theme.tres" id="2_3cfoy"]
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="4_6vnyi"]
 
 [node name="ShowingControls" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.557
+anchor_bottom = 0.046
+offset_right = 0.559937
+offset_bottom = 0.319996
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hn6vc")
+script = ExtResource("1_jxte7")
 
-[node name="ControlsContainer" type="HBoxContainer" parent="."]
+[node name="InputsContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.515
-anchor_bottom = 0.029
-offset_right = -0.80011
-offset_bottom = -0.320002
-theme_override_constants/separation = 30
+anchor_right = 0.923
+anchor_bottom = 0.62
+offset_right = -551.56
+offset_bottom = -28.38
+theme_override_constants/separation = 28
 
-[node name="StartLabel" type="Label" parent="ControlsContainer"]
+[node name="StartTimeLabel" type="Label" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("1_2quuo")
 text = "Start Time: "
 
-[node name="StartHour" type="SpinBox" parent="ControlsContainer"]
+[node name="StartHour" type="SpinBox" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("2_3cfoy")
+min_value = 1.0
+max_value = 12.0
+value = 1.0
 
-[node name="Simicolon" type="Label" parent="ControlsContainer"]
+[node name="SimiColon" type="Label" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("1_2quuo")
 text = ":"
 
-[node name="StartMinute" type="SpinBox" parent="ControlsContainer"]
+[node name="StartMinute" type="SpinBox" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("2_3cfoy")
+max_value = 59.0
+step = 15.0
 
-[node name="AmPmOptionButton" type="OptionButton" parent="ControlsContainer"]
+[node name="AmPmOptionButton" type="OptionButton" parent="InputsContainer"]
 layout_mode = 2
 item_count = 2
 popup/item_0/text = "AM"
@@ -49,32 +55,40 @@ popup/item_0/id = 0
 popup/item_1/text = "PM"
 popup/item_1/id = 1
 
-[node name="RunLabel" type="Label" parent="ControlsContainer"]
+[node name="RunTimeLabel" type="Label" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("1_2quuo")
 text = "Run Time: "
 
-[node name="RunHour" type="SpinBox" parent="ControlsContainer"]
+[node name="RunHour" type="SpinBox" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("2_3cfoy")
+min_value = 1.0
+max_value = 12.0
+value = 1.0
 
-[node name="Simicolon2" type="Label" parent="ControlsContainer"]
+[node name="SimiColon2" type="Label" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("1_2quuo")
 text = ":"
 
-[node name="RunMinute" type="SpinBox" parent="ControlsContainer"]
+[node name="RunMinute" type="SpinBox" parent="InputsContainer"]
 layout_mode = 2
 theme = ExtResource("2_3cfoy")
+max_value = 60.0
+step = 15.0
 
-[node name="UpdateButton" type="Button" parent="ControlsContainer"]
-custom_minimum_size = Vector2(80, 0)
+[node name="UpdateButton" type="Button" parent="InputsContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("4_6vnyi")
 text = "Update"
 
-[node name="DeleteButton" type="Button" parent="ControlsContainer"]
+[node name="DeleteButton" type="Button" parent="InputsContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme = ExtResource("4_6vnyi")
 text = "Delete"
+
+[connection signal="pressed" from="InputsContainer/UpdateButton" to="." method="_on_update_button_pressed"]
+[connection signal="pressed" from="InputsContainer/DeleteButton" to="." method="_on_delete_button_pressed"]

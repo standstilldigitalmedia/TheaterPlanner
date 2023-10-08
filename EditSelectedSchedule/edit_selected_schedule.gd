@@ -63,7 +63,6 @@ func _on_add_movie_button_pressed():
 	ConfigManager.add_movie(movie_name, priority, color)
 	spawn_movie_controls()
 
-
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file(GlobalManager.WELCOME_SCENE_PATH)
 

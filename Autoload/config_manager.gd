@@ -4,6 +4,7 @@ var config: ConfigFile
 var config_obj = {}
 var selected_schedule = ""
 var selected_movie = ""
+var selected_showing = ""
 
 func write_config():
 	config.set_value("planner_section","planner_json",JSON.stringify(config_obj))
@@ -41,7 +42,12 @@ func delete_selected_movie():
 	config_obj[selected_schedule].erase(selected_movie)
 	selected_movie = ""
 	write_config()
-
+	
+func delete_selected_showing():
+	config_obj[selected_schedule][selected_movie]["showings"].erase(selected_showing)
+	selected_showing = ""
+	write_config()
+	
 func add_schedule(schedule_name):
 	config_obj[schedule_name] = {}
 	write_config()
