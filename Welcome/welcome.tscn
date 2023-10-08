@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bix7llxbqpdsm"]
+[gd_scene load_steps=14 format=3 uid="uid://bix7llxbqpdsm"]
 
 [ext_resource type="Script" path="res://Welcome/welcome.gd" id="1_oxqxr"]
 [ext_resource type="Texture2D" uid="uid://cmfviwdjfkulp" path="res://UI/Images/full_screen_background.png" id="1_xmk72"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ck22lg7ds7ovc" path="res://UI/Images/text_input.png" id="3_stj55"]
 [ext_resource type="Theme" uid="uid://56nx8cnihqa2" path="res://UI/Themes/my_line_edit_theme.tres" id="4_y71xy"]
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="5_6x4xa"]
+[ext_resource type="Theme" uid="uid://85avfn20i7au" path="res://UI/Themes/my_error_label_theme.tres" id="6_8vapc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdoeq"]
 
@@ -16,6 +17,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ple5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24chu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yrjf5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -74,32 +77,36 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_24chu")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.143
-offset_bottom = -117.14
+anchor_bottom = 0.094
+offset_top = 20.0
+offset_bottom = -0.119995
 grow_horizontal = 2
 theme = ExtResource("2_pvcnf")
 text = "Schedules"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InputsContainer" type="VBoxContainer" parent="Background/Foreground"]
-custom_minimum_size = Vector2(400, 250)
+[node name="InputsContainer" type="PanelContainer" parent="Background/Foreground"]
+custom_minimum_size = Vector2(600, 160)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.388
-anchor_top = 0.153
-anchor_right = 0.612
-anchor_bottom = 0.413
-offset_left = -0.639954
-offset_top = 0.0600128
-offset_right = 0.640015
-offset_bottom = 0.26004
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -390.0
+offset_right = 300.0
+offset_bottom = -230.0
 grow_horizontal = 2
-theme_override_constants/separation = 10
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yrjf5")
 
 [node name="ScheduleNameInputBackground" type="NinePatchRect" parent="Background/Foreground/InputsContainer"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 texture = ExtResource("3_stj55")
 patch_margin_left = 17
 patch_margin_top = 17
@@ -109,61 +116,66 @@ patch_margin_bottom = 17
 [node name="ScheduleNameInput" type="LineEdit" parent="Background/Foreground/InputsContainer/ScheduleNameInputBackground"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.033
-anchor_top = 0.17
-anchor_right = 0.966
-anchor_bottom = 0.81
-offset_left = 0.200001
-offset_right = 0.199982
+anchor_left = 0.057
+anchor_top = 0.26
+anchor_right = 0.947
+anchor_bottom = 0.72
+offset_left = -0.1
+offset_right = -0.100006
 theme = ExtResource("4_y71xy")
 placeholder_text = "Enter New Schedule Name..."
 
 [node name="ErrorLabel" type="Label" parent="Background/Foreground/InputsContainer"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 4
+theme = ExtResource("6_8vapc")
+text = "Let us see
+How long this gets"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="AddScheduleButton" type="Button" parent="Background/Foreground/InputsContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme = ExtResource("5_6x4xa")
 text = "Add Schedule"
 
 [node name="SchedulesScrollContainer" type="ScrollContainer" parent="Background/Foreground"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.141
-anchor_top = 0.459
+anchor_left = 0.14
+anchor_top = 0.357
 anchor_right = 0.871
 anchor_bottom = 0.816
-offset_left = 0.0150146
-offset_top = 0.180023
-offset_right = 0.61499
-offset_bottom = 20.3201
+offset_left = 0.800018
+offset_top = 0.140015
+offset_right = -0.379883
+offset_bottom = 0.320129
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="SchedulesContainer" type="GridContainer" parent="Background/Foreground/SchedulesScrollContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 40
+theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 30
-columns = 3
+columns = 4
 
 [node name="DeleteDataButton" type="Button" parent="Background/Foreground"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.753
-anchor_top = 0.857
-anchor_right = 0.978
-anchor_bottom = 0.959
-offset_left = -0.339966
-offset_top = 0.140076
-offset_right = -0.839966
-offset_bottom = 0.180054
+anchor_left = 0.815
+anchor_top = 0.898
+anchor_right = 0.983
+anchor_bottom = 0.949
+offset_left = -0.699951
+offset_top = -0.039978
+offset_right = 0.26001
+offset_bottom = -0.0199585
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("5_6x4xa")

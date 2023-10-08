@@ -4,26 +4,32 @@ func on_movie_button_press(movie_name):
 	ConfigManager.selected_movie = movie_name
 	get_tree().change_scene_to_file(GlobalManager.EDIT_SELECTED_MOVIE_PATH)
 
-func delete_all_movie_buttons():
+func delete_all_movie_controls():
 	for movie in $Background/Foreground/MovieButtonsScrollContainer/MovieButtonsContainer.get_children():
 		movie.queue_free()
 		
-func spawn_movie_buttons():
-	delete_all_movie_buttons()
-	var data_obj = ConfigManager.config_obj[ConfigManager.selected_schedule]["data"]
+func on_movie_control_update():
+	spawn_movie_controls()
+	var confim = GlobalManager.create_confim_window("Updated", "Your record has been updated", "Ok", "Cancel")
+	add_child(confim)
+		
+func spawn_movie_controls():
+	delete_all_movie_controls()
+	var data_obj = ConfigManager.get_schedule_movies()
 	for movie in data_obj:
-		if data_obj[movie]["entry_type"] == "movie":
-			var movie_name = data_obj[movie]["entry_name"]
-			var movie_button_scene = load(GlobalManager.MY_BUTTON_SCENE_PATH)
-			var movie_button = movie_button_scene.instantiate()
-			movie_button.set_text(movie_name)
-			movie_button.pressed.connect(on_movie_button_press.bind(movie_name))
-			$Background/Foreground/MovieButtonsScrollContainer/MovieButtonsContainer.add_child(movie_button)
+		var movie_name = movie["movie_name"]
+		var movie_control_scene = load(GlobalManager.MOVIE_CONTROLS_PATH)
+		var movie_control = movie_control_scene.instantiate()
+		var priority = movie["priority"]
+		var movie_color = movie["movie_color"]
+		movie_control.set_values(movie_name, priority, movie_color)
+		movie_control.update.connect(on_movie_control_update)
+		$Background/Foreground/MovieButtonsScrollContainer/MovieButtonsContainer.add_child(movie_control)
 			
 func _ready():
 	var selected_schedule = ConfigManager.config_obj[ConfigManager.selected_schedule]
-	$Background/Foreground/HeaderLabel.set_text(selected_schedule["entry_name"])
-	spawn_movie_buttons()
+	$Background/Foreground/HeaderLabel.set_text(ConfigManager.selected_schedule)
+	spawn_movie_controls()
 	$Background/Foreground/ErrorLabel.set_text("")
 
 func _on_close_button_pressed():
@@ -31,14 +37,17 @@ func _on_close_button_pressed():
 
 func _on_add_movie_button_pressed():
 	var movie_name = $Background/Foreground/InputsContainer/MovieNameInputBackground/MovieNameInput.get_text()
-	var priority = $Background/Foreground/InputsContainer/PriorityContainer/PrioritySpinBox.get_line_edit().get_text()
-	var color = $Background/Foreground/InputsContainer/MovieColorContainer/MovieColorPicker.get_pick_color()
+	var priority = $Background/Foreground/InputsContainer/PrioritySpinBox.get_value()
+	var color = $Background/Foreground/InputsContainer/MovieColorPicker.get_pick_color()
+	$Background/Foreground/InputsContainer/MovieNameInputBackground/MovieNameInput.set_text("")
+	$Background/Foreground/InputsContainer/PrioritySpinBox.set_value(0)
+	$Background/Foreground/InputsContainer/MovieColorPicker.color = Color("#009696")
 	if movie_name == null or movie_name == "" or movie_name.length() < 3:
 		$Background/Foreground/ErrorLabel.set_text("Please enter a movie name with 3 or more characters")
 		return
 	
 	ConfigManager.add_movie(movie_name, priority, color)
-	spawn_movie_buttons()
+	spawn_movie_controls()
 
 
 func _on_back_button_pressed():

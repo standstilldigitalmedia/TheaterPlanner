@@ -3,10 +3,10 @@
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="1_es0x3"]
 
 [node name="my_button" type="Button"]
-custom_minimum_size = Vector2(400, 100)
+custom_minimum_size = Vector2(300, 50)
 anchors_preset = -1
-anchor_right = 0.208
-anchor_bottom = 0.093
-offset_right = -391.36
-offset_bottom = -92.44
+anchor_right = 0.156
+anchor_bottom = 0.046
+offset_right = -291.52
+offset_bottom = -41.68
 theme = ExtResource("1_es0x3")

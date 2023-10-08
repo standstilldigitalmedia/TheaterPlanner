@@ -11,13 +11,11 @@ func on_schedule_button_click(schedule_name):
 func spawn_schedule_buttons():
 	delete_all_schedules()
 	for schedule in ConfigManager.config_obj:
-		if ConfigManager.config_obj[schedule]["entry_type"] == "schedule":
-			var schedule_button_scene = load(GlobalManager.MY_BUTTON_SCENE_PATH)
-			var schedule_button = schedule_button_scene.instantiate()
-			var schedule_button_name = ConfigManager.config_obj[schedule]["entry_name"]
-			schedule_button.set_text(schedule_button_name)
-			schedule_button.pressed.connect(on_schedule_button_click.bind(schedule_button_name))
-			$Background/Foreground/SchedulesScrollContainer/SchedulesContainer.add_child(schedule_button)
+		var schedule_button_scene = load(GlobalManager.MY_BUTTON_SCENE_PATH)
+		var schedule_button = schedule_button_scene.instantiate()
+		schedule_button.set_text(schedule)
+		schedule_button.pressed.connect(on_schedule_button_click.bind(schedule))
+		$Background/Foreground/SchedulesScrollContainer/SchedulesContainer.add_child(schedule_button)
 
 func _on_add_schedule_button_pressed():
 	var schedule_name = $Background/Foreground/InputsContainer/ScheduleNameInputBackground/ScheduleNameInput.get_text()
@@ -32,6 +30,7 @@ func _on_add_schedule_button_pressed():
 func _ready():
 	ConfigManager.read_config()
 	spawn_schedule_buttons()
+	$Background/Foreground/InputsContainer/ErrorLabel.set_text("")
 
 func _on_delete_data_button_pressed():
 	var confirm = GlobalManager.create_confim_window("Delete Data?", "Are you sure you wish to delete all your data? Everything you have entered will be lost.", "Delete", "Cancel")

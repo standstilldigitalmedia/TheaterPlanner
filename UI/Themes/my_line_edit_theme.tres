@@ -9,7 +9,7 @@
 [resource]
 LineEdit/colors/font_color = Color(0, 0.196078, 0.196078, 1)
 LineEdit/colors/font_placeholder_color = Color(0, 0.196078, 0.196078, 0.392157)
-LineEdit/font_sizes/font_size = 37
+LineEdit/font_sizes/font_size = 20
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_codpq")
 LineEdit/styles/normal = SubResource("StyleBoxEmpty_lqgy1")
 LineEdit/styles/read_only = SubResource("StyleBoxEmpty_31tm8")

@@ -1,8 +1,8 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bio0np2bdwycd"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://85avfn20i7au"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrcjy"]
 
 [resource]
-Label/colors/font_color = Color(0.00392157, 0.682353, 0.682353, 1)
+Label/colors/font_color = Color(1, 0, 0, 1)
 Label/font_sizes/font_size = 20
 Label/styles/normal = SubResource("StyleBoxEmpty_jrcjy")

@@ -14,6 +14,7 @@ LineEdit/colors/font_color = Color(0.00392157, 0.756863, 0.756863, 1)
 LineEdit/colors/font_placeholder_color = Color(0.00392157, 0.756863, 0.756863, 0.6)
 LineEdit/colors/font_selected_color = Color(0.00392157, 0.756863, 0.756863, 1)
 LineEdit/constants/minimum_character_width = 2
+LineEdit/font_sizes/font_size = 20
 LineEdit/styles/focus = SubResource("StyleBoxFlat_5b1if")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_8dc5f")
 SpinBox/icons/updown = ExtResource("1_eas1u")

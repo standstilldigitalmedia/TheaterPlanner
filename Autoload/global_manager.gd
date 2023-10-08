@@ -7,6 +7,7 @@ const MY_BUTTON_SCENE_PATH = "res://UI/Scenes/my_button.tscn"
 const WELCOME_SCENE_PATH = "res://Welcome/welcome.tscn"
 const EDIT_SELECTED_SCHEDULE_PATH = "res://EditSelectedSchedule/edit_selected_schedule.tscn"
 const EDIT_SELECTED_MOVIE_PATH = "res://EditSelectedMovie/edit_selected_movie.tscn"
+const MOVIE_CONTROLS_PATH = "res://MovieControls/movie_controls.tscn"
 
 func create_confim_window(title, question, button_1_text, button_2_text):
 	var confirm_window_scene = load(MY_CONFIRM_WINDOW_PATH)
