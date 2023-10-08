@@ -1,6 +1,6 @@
 extends Control
 
-signal update
+signal update(start_hour, start_minute, start_ampm, run_hour, run_min)
 signal delete
 
 var prev_start_hour = 0
@@ -8,9 +8,6 @@ var prev_start_min = 0
 var prev_start_ampm = ""
 var prev_run_hour = 0
 var prev_run_min = 0
-
-func get_values():
-	print("n")
 
 func set_values(start_hour, start_minute, start_ampm, run_hour, run_min):
 	$InputsContainer/StartHour.set_value(start_hour)
@@ -26,7 +23,7 @@ func set_values(start_hour, start_minute, start_ampm, run_hour, run_min):
 
 func _on_update_button_pressed():
 	ConfigManager.selected_showing = str(prev_start_hour) + str(prev_start_min) + str(prev_start_ampm) + str(prev_run_hour) + str(prev_run_min)
-	update.emit()
+	update.emit($InputsContainer/StartHour.get_value(),$InputsContainer/StartMinute.get_value(),$InputsContainer/AmPmOptionButton.get_text(),$InputsContainer/RunHour.get_value(),$InputsContainer/RunMinute.get_value())
 
 func _on_delete_button_pressed():
 	ConfigManager.selected_showing = str(prev_start_hour) + str(prev_start_min) + str(prev_start_ampm) + str(prev_run_hour) + str(prev_run_min)

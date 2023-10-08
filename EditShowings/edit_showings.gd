@@ -19,6 +19,12 @@ func on_confirm_delete_showing():
 	var confirm = GlobalManager.create_confim_window("Delete Showing?", "Are you sure you want to delete this showing? This can not be undone.", "Delete", "Cancel")
 	confirm.button1.connect(on_delete_showing)
 	add_child(confirm)
+	
+func on_update_showing(start_hour, start_minute, start_ampm, run_hour, run_min):
+	ConfigManager.update_showing(start_hour, start_minute, start_ampm, run_hour, run_min)
+	spawn_showing_controls()
+	var confirm = GlobalManager.create_confim_window("Updated", "Your record has been updated", "Ok", "Cancel")
+	add_child(confirm)
 		
 func spawn_showing_controls():
 	delete_all_showing_controls()
@@ -37,6 +43,7 @@ func spawn_showing_controls():
 		
 		showing_control.set_values(start_hour, start_minute, start_ampm, run_hour, run_minute)
 		showing_control.delete.connect(on_confirm_delete_showing)
+		showing_control.update.connect(on_update_showing)
 		$Background/Foreground/ShowingsControlsScrollContainer/ShowingsControlsContainer.add_child(showing_control)
 
 func _ready():
