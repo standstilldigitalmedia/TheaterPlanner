@@ -48,6 +48,10 @@ func delete_selected_showing():
 	selected_showing = ""
 	write_config()
 	
+func delete_all_showings():
+	config_obj[selected_schedule][selected_movie]["showings"] = {}
+	write_config()
+	
 func add_schedule(schedule_name):
 	config_obj[schedule_name] = {}
 	write_config()

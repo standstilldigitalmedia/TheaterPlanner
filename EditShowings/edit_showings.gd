@@ -55,3 +55,12 @@ func _on_add_showing_button_pressed():
 	ConfigManager.add_showing($Background/Foreground/ControlsContainer/StartHour.get_value(), $Background/Foreground/ControlsContainer/StartMinute.get_value(), $Background/Foreground/ControlsContainer/AmPmOptionButton.get_text(), $Background/Foreground/ControlsContainer/RunHour.get_value(), $Background/Foreground/ControlsContainer/RunMinute.get_value())
 	reset_controls()
 	spawn_showing_controls()
+	
+func on_delete_all_showings():
+	ConfigManager.delete_all_showings()
+	spawn_showing_controls()
+
+func _on_delete_all_showings_button_pressed():
+	var confirm = GlobalManager.create_confim_window("Delete All Showings?", "Are you sure you want to delete all showings? This can not be undone.", "Delete", "Cancel")
+	confirm.button1.connect(on_delete_all_showings)
+	add_child(confirm)

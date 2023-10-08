@@ -9,6 +9,9 @@ var prev_start_ampm = ""
 var prev_run_hour = 0
 var prev_run_min = 0
 
+func get_values():
+	print("n")
+
 func set_values(start_hour, start_minute, start_ampm, run_hour, run_min):
 	$InputsContainer/StartHour.set_value(start_hour)
 	$InputsContainer/StartMinute.set_value(start_minute)
