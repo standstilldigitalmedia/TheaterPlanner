@@ -121,7 +121,6 @@ text = ":"
 layout_mode = 2
 theme = ExtResource("5_nqdfy")
 max_value = 59.0
-step = 15.0
 
 [node name="AmPmOptionButton" type="OptionButton" parent="Background/Foreground/ControlsContainer"]
 layout_mode = 2
@@ -152,7 +151,6 @@ text = ":"
 layout_mode = 2
 theme = ExtResource("5_nqdfy")
 max_value = 59.0
-step = 15.0
 
 [node name="ErrorLabel" type="Label" parent="Background/Foreground"]
 layout_mode = 1

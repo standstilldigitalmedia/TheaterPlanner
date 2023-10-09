@@ -36,17 +36,15 @@ func spawn_graph_container():
 
 func get_rect_x_pos(hour, minute, ampm):
 	var new_x = 0
-	print("hour - 9 = " + str(hour - 9))
-	if ampm == "AM":
+	if ampm == 0:
 		new_x = (hour_size * (hour - 9)) + nineam
 	else:
 		if hour == 12:
 			new_x = noon
 		else:
 			new_x = ((hour * hour_size) + noon + nineam) - hour_size
-	print("rect_x_pos " + str(new_x + (minute / 60)))
-	if minute != 0:
-		new_x += (minute / 60)
+	#if minute != 0:
+	new_x += minute
 	return new_x
 	
 func get_end_time(start_hour, start_minute, ampm, run_hour, run_minute):
@@ -57,7 +55,7 @@ func get_end_time(start_hour, start_minute, ampm, run_hour, run_minute):
 	if end_minutes > 60:
 		end_minutes -= 60
 		end_hour += 1
-	if ampm == "AM":
+	if ampm == 0:
 		if end_hour > 12:
 			end_ampm = "PM"
 			end_hour = end_hour - 12
@@ -81,10 +79,10 @@ func _ready():
 			var run_minute = config_listing["run_minute"]
 			
 			var x_pos = get_rect_x_pos(start_hour, start_minute, ampm)
-			var minute = 0
-			if start_minute != 0:
-				minute = start_minute / 60
-			var width = (run_hour * hour_size) + run_minute + start_minute
+			#var minute = 0
+			#if start_minute != 0:
+				#minute = start_minute 
+			var width = (run_hour * hour_size) + run_minute
 			var color = ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["movie_color"]
 			var new_start_minute = start_minute
 			if start_minute == 0:
