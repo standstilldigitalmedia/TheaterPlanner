@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://1nqam2reaa5m"]
+
+[node name="MovieGraphContainer" type="Container"]
+custom_minimum_size = Vector2(1150, 31)
+anchors_preset = -1
+anchor_right = 0.599
+anchor_bottom = 0.037
+offset_right = -1110.08
+offset_bottom = 0.0400009

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4yrdcvcngup6"]
+
+[ext_resource type="Theme" uid="uid://bio0np2bdwycd" path="res://UI/Themes/my_label_theme.tres" id="1_frpt6"]
+
+[node name="MovieNameLabel" type="Label"]
+custom_minimum_size = Vector2(533, 0)
+anchors_preset = -1
+anchor_right = 0.278
+anchor_bottom = 0.026
+offset_right = -493.76
+offset_bottom = -5.08
+theme = ExtResource("1_frpt6")
+horizontal_alignment = 2
+autowrap_mode = 2

@@ -30,7 +30,7 @@ func spawn_showing_controls():
 	delete_all_showing_controls()
 	var spacer_scene = load(GlobalManager.SPACER_PATH)
 	$Background/Foreground/ShowingsControlsScrollContainer/ShowingsControlsContainer.add_child(spacer_scene.instantiate())
-	var data_obj = ConfigManager.get_movie_showings()
+	var data_obj = ConfigManager.get_selected_movie_showings()
 	for showing in data_obj:
 		var start_hour = showing["start_hour"]
 		var start_minute = showing["start_minute"]

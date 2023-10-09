@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="5_6x4xa"]
 [ext_resource type="Theme" uid="uid://85avfn20i7au" path="res://UI/Themes/my_error_label_theme.tres" id="6_8vapc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdoeq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk4ab"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xosmk"]
 
@@ -67,7 +67,7 @@ anchor_bottom = 0.041
 offset_left = 31.1598
 offset_bottom = -32.18
 grow_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_cdoeq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kk4ab")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_xosmk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_3ry86")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_1ple5")

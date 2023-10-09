@@ -74,3 +74,6 @@ func _on_delete_schedule_button_pressed():
 	var confirm = GlobalManager.create_confim_window("Delete " + ConfigManager.selected_schedule + "?", "Are you sure you want to delete the entire " + ConfigManager.selected_schedule + " schedule? This can not be undone.", "Delete", "cancel")
 	confirm.button1.connect(delete_selected_schedule)
 	add_child(confirm)
+
+func _on_view_report_button_pressed():
+	get_tree().change_scene_to_file(GlobalManager.GRAPH_REPORT_SCENE_PATH)

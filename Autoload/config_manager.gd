@@ -85,7 +85,7 @@ func get_schedule_movies():
 		return_var.append({"movie_name":config_obj[selected_schedule][movie]["movie_name"],"priority":config_obj[selected_schedule][movie]["priority"],"movie_color":config_obj[selected_schedule][movie]["movie_color"]})
 	return return_var
 	
-func get_movie_showings():
+func get_selected_movie_showings():
 	var return_var = []
 	for showing in config_obj[selected_schedule][selected_movie]["showings"]:
 		var this_showing = config_obj[selected_schedule][selected_movie]["showings"][showing]
