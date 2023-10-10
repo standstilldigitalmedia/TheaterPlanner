@@ -82,7 +82,14 @@ func update_showing(start_hour, start_minute, start_ampm, run_hour, run_min):
 func get_schedule_movies():
 	var return_var = []
 	for movie in config_obj[selected_schedule]:
-		return_var.append({"movie_name":config_obj[selected_schedule][movie]["movie_name"],"priority":config_obj[selected_schedule][movie]["priority"],"movie_color":config_obj[selected_schedule][movie]["movie_color"]})
+		return_var.append({"movie_name":config_obj[selected_schedule][movie]["movie_name"],"priority":config_obj[selected_schedule][movie]["priority"],"movie_color":config_obj[selected_schedule][movie]["movie_color"], "showings":config_obj[selected_schedule][movie]["showings"]})
+	for a in return_var.size():
+		for b in return_var.size():
+			if b < return_var.size() - 1:
+				if return_var[b]["priority"] > return_var[b + 1]["priority"]:
+					var temp_movie = return_var[b]
+					return_var[b] = return_var[b + 1]
+					return_var[b + 1] = temp_movie
 	return return_var
 	
 func get_selected_movie_showings():

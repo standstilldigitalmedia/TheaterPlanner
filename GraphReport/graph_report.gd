@@ -67,14 +67,16 @@ func on_graph_button_click(clicked_button):
 				
 func _ready():
 	$Background/Foreground/HeaderLabel.set_text(ConfigManager.selected_schedule)
-	for movie in ConfigManager.config_obj[ConfigManager.selected_schedule]:
-		spawn_name_label(movie)
+	for movie in ConfigManager.get_schedule_movies():
+		spawn_name_label(movie["movie_name"])
 		var graph_container = spawn_graph_container()
-		for listing in ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["showings"]:
-			var config_listing = ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["showings"][listing]
+		for listing in movie["showings"]:
+			print("lising json = " + JSON.stringify(listing))
+			var this_listing = movie["showings"][listing]
+			#var config_listing = ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["showings"][listing]
 			var graph_button_scene = load(GlobalManager.GRAPH_BUTTON_PATH)
 			var graph_button = graph_button_scene.instantiate()
-			graph_button.set_values(config_listing["start_hour"], config_listing["start_minute"], config_listing["start_ampm"], config_listing["run_hour"], config_listing["run_minute"], ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["movie_color"], movie)
+			graph_button.set_values(this_listing["start_hour"], this_listing["start_minute"], this_listing["start_ampm"], this_listing["run_hour"], this_listing["run_minute"], ConfigManager.config_obj[ConfigManager.selected_schedule][movie["movie_name"]]["movie_color"], movie["movie_name"])
 			graph_button.create_color_rect()
 			graph_button.graph_click.connect(on_graph_button_click)
 			graph_container.add_child(graph_button)
