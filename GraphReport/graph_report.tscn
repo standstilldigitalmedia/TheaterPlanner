@@ -278,5 +278,23 @@ grow_vertical = 0
 theme = ExtResource("5_378f0")
 text = "Back"
 
+[node name="ClearButton" type="Button" parent="Background/Foreground"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.815
+anchor_top = 0.816
+anchor_right = 0.983
+anchor_bottom = 0.867
+offset_left = -0.699951
+offset_top = 0.320068
+offset_right = 0.26001
+offset_bottom = 0.340088
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("5_378f0")
+text = "Clear Selection"
+
 [connection signal="pressed" from="Background/Foreground/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Background/Foreground/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Background/Foreground/ClearButton" to="." method="_on_clear_button_pressed"]

@@ -1,6 +1,5 @@
 extends Node
 
-
 const CONFIG_PATH = "user://theater-planner.cfg"
 const MY_CONFIRM_WINDOW_PATH = "res://MyConfirmWindow/my_confirm_window.tscn"
 const MY_BUTTON_SCENE_PATH = "res://UI/Scenes/my_button.tscn"
@@ -11,6 +10,7 @@ const EDIT_SHOWINGS_SCENE_PATH = "res://EditShowings/edit_showings.tscn"
 const SHOWING_CONTROLS_PATH = "res://ShowingControls/showing_controls.tscn"
 const SPACER_PATH = "res://ShowingControls/spacer_container.tscn"
 const GRAPH_REPORT_SCENE_PATH = "res://GraphReport/graph_report.tscn"
+const GRAPH_BUTTON_PATH = "res://GraphButton/graph_button.tscn"
 
 func create_confim_window(title, question, button_1_text, button_2_text):
 	var confirm_window_scene = load(MY_CONFIRM_WINDOW_PATH)

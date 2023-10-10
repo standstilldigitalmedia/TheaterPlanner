@@ -2,9 +2,8 @@ extends Control
 
 const NAME_LABEL_PATH = "res://GraphReport/movie_name_label.tscn"
 const GRAPH_CONTAINER_PATH = "res://GraphReport/movie_graph_container.tscn"
-var nineam = 12
-var hour_size = 62
-var noon = 248
+
+var graph_buttons_array = []
 
 func spawn_name_label(movie_name):
 	var name_label_scene = load(NAME_LABEL_PATH)
@@ -14,57 +13,68 @@ func spawn_name_label(movie_name):
 	
 func color_rect_click():
 	print("Look at me")
-	
-func create_color_rect(x_pos,width, color, tooltip):
-	var new_rect = Button.new()
-	new_rect.position = Vector2(x_pos,0)
-	new_rect.custom_minimum_size = Vector2(width,31)
-	var new_stylebox_normal = new_rect.get_theme_stylebox("normal").duplicate()
-	new_stylebox_normal.bg_color = color
-	new_rect.add_theme_stylebox_override("normal", new_stylebox_normal)
-	new_rect.add_theme_stylebox_override("hover", new_stylebox_normal)
-	new_rect.add_theme_stylebox_override("pressed", new_stylebox_normal)
-	new_rect.add_theme_stylebox_override("disabled", new_stylebox_normal)
-	new_rect.tooltip_text = tooltip
-	new_rect.pressed.connect(color_rect_click)
-	return new_rect
-	
+
 func spawn_graph_container():
 	var graph_container_scene = load(GRAPH_CONTAINER_PATH)
 	var graph_container = graph_container_scene.instantiate()
 	return graph_container
+	
+func get_military_hour(hour, ampm):
+	if ampm == 0:
+		return hour
+	elif hour == 12:
+		return 12
+	return hour + 12
 
-func get_rect_x_pos(hour, minute, ampm):
-	var new_x = 0
-	if ampm == 0:
-		new_x = (hour_size * (hour - 9)) + nineam
-	else:
-		if hour == 12:
-			new_x = noon
-		else:
-			new_x = ((hour * hour_size) + noon + nineam) - hour_size
-	#if minute != 0:
-	new_x += minute
-	return new_x
+func on_graph_button_click(clicked_button, json_object):
+	for graph_button in graph_buttons_array:
+		if graph_button != clicked_button:
+			var graph_button_mil_start_hour = get_military_hour(graph_button.start_hour, graph_button.ampm)
+			var json_object_mil_start_hour = get_military_hour(json_object["start_hour"], json_object["ampm"])
+			var graph_button_mil_end_hour = graph_button_mil_start_hour + graph_button.run_hour
+			var json_object_mil_end_hour = json_object_mil_start_hour + json_object["run_hour"]
+			
+			var graph_button_end_minute = graph_button.start_minute + graph_button.run_minute
+			if graph_button_end_minute > 60:
+				graph_button_mil_end_hour += 1
+				graph_button_end_minute -= 60
+				
+			var json_object_end_minute = json_object["start_minute"] + json_object["run_minute"]
+			if json_object_end_minute > 60:
+				json_object_mil_end_hour += 1
+				json_object_end_minute -= 60
+				
+			if graph_button_mil_start_hour == json_object_mil_start_hour:
+				if graph_button.start_minute >= json_object["start_minute"]:
+					graph_button.set_disabled(true)
+					continue
+			if graph_button_mil_end_hour == json_object_mil_end_hour:
+				if graph_button_end_minute <= json_object["start_minute"]:
+					graph_button.set_disabled(true)
+					continue	
+			if graph_button_mil_start_hour == json_object_mil_end_hour:
+				if graph_button.start_minute < json_object_end_minute:
+					graph_button.set_disabled(true)
+					continue
+			if graph_button_mil_end_hour == json_object_mil_start_hour:
+				if graph_button_end_minute > json_object["start_minute"]:
+					graph_button.set_disabled(true)
+					continue
 	
-func get_end_time(start_hour, start_minute, ampm, run_hour, run_minute):
-	var end_minutes = start_minute + run_minute
-	var end_hour = 0
-	var end_ampm = "AM"
-	end_hour = start_hour + run_hour
-	if end_minutes > 60:
-		end_minutes -= 60
-		end_hour += 1
-	if ampm == 0:
-		if end_hour > 12:
-			end_ampm = "PM"
-			end_hour = end_hour - 12
-	else:
-		if end_hour > 12:
-			end_ampm = "AM"
-			end_hour = end_hour - 12
-	return str(end_hour) + ":" + str(end_minutes)
-	
+			if graph_button_mil_start_hour > json_object_mil_start_hour and graph_button_mil_start_hour < json_object_mil_end_hour:
+				graph_button.set_disabled(true)
+				continue
+			if graph_button_mil_end_hour > json_object_mil_start_hour and graph_button_mil_end_hour < json_object_mil_end_hour:
+				graph_button.set_disabled(true)
+				continue
+				
+			if json_object_mil_start_hour > graph_button_mil_start_hour and json_object_mil_start_hour < graph_button_mil_end_hour:
+				graph_button.set_disabled(true)
+				continue
+			if json_object_mil_end_hour > graph_button_mil_start_hour and json_object_mil_end_hour < graph_button_mil_end_hour:
+				graph_button.set_disabled(true)
+				continue
+				
 func _ready():
 	$Background/Foreground/HeaderLabel.set_text(ConfigManager.selected_schedule)
 	for movie in ConfigManager.config_obj[ConfigManager.selected_schedule]:
@@ -72,24 +82,13 @@ func _ready():
 		var graph_container = spawn_graph_container()
 		for listing in ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["showings"]:
 			var config_listing = ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["showings"][listing]
-			var start_hour = config_listing["start_hour"]
-			var start_minute = config_listing["start_minute"]
-			var ampm = config_listing["start_ampm"]
-			var run_hour = config_listing["run_hour"]
-			var run_minute = config_listing["run_minute"]
-			
-			var x_pos = get_rect_x_pos(start_hour, start_minute, ampm)
-			#var minute = 0
-			#if start_minute != 0:
-				#minute = start_minute 
-			var width = (run_hour * hour_size) + run_minute
-			var color = ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["movie_color"]
-			var new_start_minute = start_minute
-			if start_minute == 0:
-				new_start_minute = "00"
-			var tooltip = movie + "\n" + str(start_hour) + ":" + str(new_start_minute) + " - " + get_end_time(start_hour, start_minute, ampm, run_hour, run_minute)
-			var color_rect = create_color_rect(x_pos,width, color, tooltip)
-			graph_container.add_child(color_rect)
+			var graph_button_scene = load(GlobalManager.GRAPH_BUTTON_PATH)
+			var graph_button = graph_button_scene.instantiate()
+			graph_button.set_values(config_listing["start_hour"], config_listing["start_minute"], config_listing["start_ampm"], config_listing["run_hour"], config_listing["run_minute"], ConfigManager.config_obj[ConfigManager.selected_schedule][movie]["movie_color"], movie)
+			graph_button.create_color_rect()
+			graph_button.graph_click.connect(on_graph_button_click)
+			graph_container.add_child(graph_button)
+			graph_buttons_array.append(graph_button)
 		$Background/Foreground/GraphScrollContainer/GraphContainer/MovieGraphsContainer.add_child(graph_container)
 	
 func _on_close_button_pressed():
@@ -97,3 +96,8 @@ func _on_close_button_pressed():
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file(GlobalManager.EDIT_SELECTED_SCHEDULE_PATH)
+
+
+func _on_clear_button_pressed():
+	for graph_button in graph_buttons_array:
+		graph_button.set_disabled(false)

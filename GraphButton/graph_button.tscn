@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://lusestvk50im"]
+
+[ext_resource type="Script" path="res://GraphButton/graph_button.gd" id="1_l0ypo"]
+
+[node name="GraphButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_l0ypo")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
