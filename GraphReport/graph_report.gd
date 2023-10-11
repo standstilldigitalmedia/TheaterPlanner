@@ -16,9 +16,13 @@ func spawn_graph_container():
 	var graph_container = graph_container_scene.instantiate()
 	return graph_container
 
-func on_graph_button_click(clicked_button):
+func on_graph_button_click(clicked_button, disable):
 	for graph_button in graph_buttons_array:
 		if graph_button != clicked_button:
+			if graph_button.movie == clicked_button.movie:
+				graph_button.set_disabled(disable)
+				continue
+				
 			var graph_button_mil_start_hour = graph_button.get_military_hour(graph_button.start_hour, graph_button.ampm)
 			var json_object_mil_start_hour = clicked_button.get_military_hour(clicked_button.start_hour, clicked_button.ampm)
 			var graph_button_mil_end_hour = graph_button_mil_start_hour + graph_button.run_hour
@@ -36,33 +40,33 @@ func on_graph_button_click(clicked_button):
 				
 			if graph_button_mil_start_hour == json_object_mil_start_hour:
 				if graph_button.start_minute >= clicked_button.start_minute:
-					graph_button.set_disabled(true)
+					graph_button.set_disabled(disable)
 					continue
 			if graph_button_mil_end_hour == json_object_mil_end_hour:
 				if graph_button_end_minute <= clicked_button.start_minute:
-					graph_button.set_disabled(true)
+					graph_button.set_disabled(disable)
 					continue	
 			if graph_button_mil_start_hour == json_object_mil_end_hour:
 				if graph_button.start_minute < json_object_end_minute:
-					graph_button.set_disabled(true)
+					graph_button.set_disabled(disable)
 					continue
 			if graph_button_mil_end_hour == json_object_mil_start_hour:
 				if graph_button_end_minute > clicked_button.start_minute:
-					graph_button.set_disabled(true)
+					graph_button.set_disabled(disable)
 					continue
 	
 			if graph_button_mil_start_hour > json_object_mil_start_hour and graph_button_mil_start_hour < json_object_mil_end_hour:
-				graph_button.set_disabled(true)
+				graph_button.set_disabled(disable)
 				continue
 			if graph_button_mil_end_hour > json_object_mil_start_hour and graph_button_mil_end_hour < json_object_mil_end_hour:
-				graph_button.set_disabled(true)
+				graph_button.set_disabled(disable)
 				continue
 				
 			if json_object_mil_start_hour > graph_button_mil_start_hour and json_object_mil_start_hour < graph_button_mil_end_hour:
-				graph_button.set_disabled(true)
+				graph_button.set_disabled(disable)
 				continue
 			if json_object_mil_end_hour > graph_button_mil_start_hour and json_object_mil_end_hour < graph_button_mil_end_hour:
-				graph_button.set_disabled(true)
+				graph_button.set_disabled(disable)
 				continue
 				
 func _ready():
@@ -78,7 +82,7 @@ func _ready():
 			var graph_button = graph_button_scene.instantiate()
 			graph_button.set_values(this_listing["start_hour"], this_listing["start_minute"], this_listing["start_ampm"], this_listing["run_hour"], this_listing["run_minute"], ConfigManager.config_obj[ConfigManager.selected_schedule][movie["movie_name"]]["movie_color"], movie["movie_name"])
 			graph_button.create_color_rect()
-			graph_button.graph_click.connect(on_graph_button_click)
+			graph_button.graph_clicked.connect(on_graph_button_click)
 			graph_container.add_child(graph_button)
 			graph_buttons_array.append(graph_button)
 		$Background/Foreground/GraphScrollContainer/GraphContainer/MovieGraphsContainer.add_child(graph_container)

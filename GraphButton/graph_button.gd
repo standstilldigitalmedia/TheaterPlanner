@@ -1,6 +1,6 @@
 extends Button
 
-signal graph_click(clicked_button)
+signal graph_clicked(clicked_button, disable)
 
 var start_hour = 0
 var start_minute = 0
@@ -13,6 +13,7 @@ var hour_size = 62
 var noon = 248
 var tooltip = ""
 var movie = ""
+var disable = false
 
 func get_military_hour(hour, ampm):
 	if ampm == 0:
@@ -140,5 +141,8 @@ func create_color_rect():
 	tooltip_text = tooltip
 
 func _on_pressed():
-	graph_click.emit(self)
-
+	if disable == true:
+		disable = false
+	else:
+		disable = true
+	graph_clicked.emit(self, disable)
