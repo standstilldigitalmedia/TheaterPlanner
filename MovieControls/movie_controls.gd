@@ -1,4 +1,4 @@
-extends Control
+extends HBoxContainer
 
 signal update
 signal delete
@@ -7,15 +7,15 @@ signal showings
 var previous_name = ""
 
 func set_values(movie_name, priority, movie_color):
-	$InputsContainer/NameInputBackground/NameInput.set_text(movie_name)
-	$InputsContainer/PrioritySpinBox.set_value(priority)
-	$InputsContainer/MovieColorPicker.color = movie_color
+	$NameInputBackground/NameInput.set_text(movie_name)
+	$PrioritySpinBox.set_value(priority)
+	$MovieColorPicker.color = movie_color
 	previous_name = movie_name
 	
 func update_config():
 	var new_prev_name = previous_name
-	previous_name = $InputsContainer/NameInputBackground/NameInput.get_text()
-	ConfigManager.update_movie($InputsContainer/NameInputBackground/NameInput.get_text(),new_prev_name, $InputsContainer/PrioritySpinBox.get_value(), $InputsContainer/MovieColorPicker.color)
+	previous_name = $NameInputBackground/NameInput.get_text()
+	ConfigManager.update_movie($NameInputBackground/NameInput.get_text(),new_prev_name, $PrioritySpinBox.get_value(), $MovieColorPicker.color)
 	update.emit()
 
 

@@ -26,6 +26,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="Theater Planner"
+
 [rendering]
 
 renderer/rendering_method="mobile"

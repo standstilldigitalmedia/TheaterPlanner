@@ -7,26 +7,16 @@
 [ext_resource type="Theme" uid="uid://cepf0eeqt2mpk" path="res://UI/Themes/my_spinbox_theme.tres" id="4_pwbb8"]
 [ext_resource type="Theme" uid="uid://wgr8ngf3t34r" path="res://UI/Themes/my_button_theme.tres" id="5_b1nrr"]
 
-[node name="MovieControls" type="Control"]
-layout_mode = 3
-anchor_right = 0.557
-anchor_bottom = 0.046
-offset_right = 0.559937
-offset_bottom = 0.319996
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MovieControls" type="HBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.716
+anchor_bottom = 0.056
+offset_right = -0.270142
+offset_bottom = -0.480003
+theme_override_constants/separation = 43
 script = ExtResource("1_ccmf3")
 
-[node name="InputsContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.104
-anchor_bottom = 1.0
-offset_right = -745.23
-offset_bottom = -47.38
-theme_override_constants/separation = 43
-
-[node name="NameInputBackground" type="NinePatchRect" parent="InputsContainer"]
+[node name="NameInputBackground" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 texture = ExtResource("1_bg0xx")
@@ -35,7 +25,7 @@ patch_margin_top = 16
 patch_margin_right = 15
 patch_margin_bottom = 16
 
-[node name="NameInput" type="LineEdit" parent="InputsContainer/NameInputBackground"]
+[node name="NameInput" type="LineEdit" parent="NameInputBackground"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.06
@@ -49,43 +39,43 @@ offset_bottom = 6.10352e-05
 theme = ExtResource("2_iqcoo")
 placeholder_text = "Enter Movie Name..."
 
-[node name="PriorityLabel" type="Label" parent="InputsContainer"]
+[node name="PriorityLabel" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("3_nppy4")
 text = "Priority:"
 
-[node name="PrioritySpinBox" type="SpinBox" parent="InputsContainer"]
+[node name="PrioritySpinBox" type="SpinBox" parent="."]
 layout_mode = 2
 theme = ExtResource("4_pwbb8")
 
-[node name="MovieColorLabel" type="Label" parent="InputsContainer"]
+[node name="MovieColorLabel" type="Label" parent="."]
 layout_mode = 2
 theme = ExtResource("3_nppy4")
 text = "Movie Color:"
 
-[node name="MovieColorPicker" type="ColorPickerButton" parent="InputsContainer"]
+[node name="MovieColorPicker" type="ColorPickerButton" parent="."]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0, 0.588235, 0.588235, 1)
 
-[node name="UpdateButton" type="Button" parent="InputsContainer"]
+[node name="UpdateButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("5_b1nrr")
 text = "Update"
 
-[node name="ShowingsButton" type="Button" parent="InputsContainer"]
+[node name="ShowingsButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("5_b1nrr")
 text = "Showings"
 
-[node name="DeleteButton" type="Button" parent="InputsContainer"]
+[node name="DeleteButton" type="Button" parent="."]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme = ExtResource("5_b1nrr")
 text = "Delete"
 
-[connection signal="pressed" from="InputsContainer/UpdateButton" to="." method="update_config"]
-[connection signal="pressed" from="InputsContainer/ShowingsButton" to="." method="_on_showings_button_pressed"]
-[connection signal="pressed" from="InputsContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="UpdateButton" to="." method="update_config"]
+[connection signal="pressed" from="ShowingsButton" to="." method="_on_showings_button_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]

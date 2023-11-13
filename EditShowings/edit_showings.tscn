@@ -204,10 +204,10 @@ offset_bottom = 0.300049
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShowingsControlsContainer" type="GridContainer" parent="Background/Foreground/ShowingsControlsScrollContainer"]
+[node name="ShowingsControlsContainer" type="VBoxContainer" parent="Background/Foreground/ShowingsControlsScrollContainer"]
+custom_minimum_size = Vector2(1003, 400)
 layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 88
+theme_override_constants/separation = 20
 
 [node name="BackButton" type="Button" parent="Background/Foreground"]
 custom_minimum_size = Vector2(300, 50)
